@@ -1,5 +1,11 @@
 # overlayer
 
+Try to run this app:
+
+```bash
+podman build -t overlayer-dev . && podman run -v $(pwd)/config.yaml:/app/config.yaml:ro,z -v $(pwd)/logo.svg:/app/logo.svg:ro,z overlayer-dev
+```
+
 Example of ffmpeg cli:
 
 ```bash
