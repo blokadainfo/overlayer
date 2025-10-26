@@ -40,7 +40,7 @@ func loadConfig(filename string) (*Config, error) {
 
 // inferProtocol infers the protocol (RTMP or SRT) from the stream URL.
 func inferProtocol(url string) string {
-	if strings.HasPrefix(url, "rtmp://") {
+	if strings.HasPrefix(url, "rtmp://") || strings.HasPrefix(url, "rtmps://") {
 		return "rtmp"
 	} else if strings.HasPrefix(url, "srt://") {
 		return "srt"
@@ -54,23 +54,12 @@ func createFFmpegCommand(config *Config) *exec.Cmd {
 
 	// FFmpeg command to read the input stream and overlay the logo
 	cmdArgs := []string{
-		"-re",
-		"-analyzeduration", "5000000",
-		"-probesize", "10000000",
 		"-i", config.Input,
 		"-i", config.Logo.Path,
 		"-filter_complex", fmt.Sprintf("[1:v]scale=%d:%d,format=rgba,colorchannelmixer=aa=0.75[logo];[0:v][logo]overlay=24:(main_h-overlay_h)/2", config.Logo.Width, config.Logo.Height),
 		"-c:v", "libx264",
-		"-preset", "utrafast",
-		"-tune", "zerolatency",
-		"-c:a", "copy",
-		"-flush_packets", "0",
-		"-max_muxing_queue_size", "1024",
-		"-reconnect", "1",
-		"-reconnect_streamed", "1",
-		"-reconnect_delay_max", "5",
-		"-err_detect", "ignore_err",
-		"-loglevel", "warning",
+		"-preset", "ultrafast",
+		"-c:a", "aac",
 	}
 
 	// Set output format based on protocol
