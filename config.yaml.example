@@ -1,6 +1,0 @@
-input: "rtmp://example.com/stream" # RTMP or SRT input stream URL
-output: "srt://example.com/live" # RTMP or SRT output stream URL
-logo:
-  path: "logo.svg" # Path to the logo (SVG or PNG)
-  width: 128 # Width of the logo
-  height: 128 # Height of the logo

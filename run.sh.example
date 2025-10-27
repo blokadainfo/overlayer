@@ -1,0 +1,10 @@
+#!/bin/bash
+podman build -t overlayer-dev . && \
+podman run \
+  -v $(pwd)/logo.svg:/app/logo.svg:ro,z \
+  -e OVERLAY_LOGO_PATH="logo.svg" \
+  -e OVERLAY_LOGO_HEIGHT="128" \
+  -e OVERLAY_LOGO_WIDTH="128" \
+  -e STREAMS_0_SRC="INPUT" \
+  -e STREAMS_0_DST="OUTPUT" \
+  overlayer-dev

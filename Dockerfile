@@ -1,8 +1,9 @@
 FROM golang:1.25 AS build
 WORKDIR /app
+COPY go.mod ./
+RUN go mod download
 COPY . .
-RUN go mod tidy
-RUN go build -o overlayer .
+RUN CGO_ENABLED=0 go build -ldflags="-s -w" -trimpath -o overlayer .
 
 FROM debian:trixie-slim
 WORKDIR /app

@@ -3,13 +3,21 @@
 Try to run this app:
 
 ```bash
-podman build -t overlayer-dev . && podman run -v $(pwd)/config.yaml:/app/config.yaml:ro,z -v $(pwd)/logo.svg:/app/logo.svg:ro,z overlayer-dev
+podman build -t overlayer-dev . && \
+podman run \
+  -v $(pwd)/logo.svg:/app/logo.svg:ro,z \
+  -e OVERLAY_LOGO_PATH="logo.svg" \
+  -e OVERLAY_LOGO_HEIGHT="128" \
+  -e OVERLAY_LOGO_WIDTH="128" \
+  -e STREAMS_0_SRC="rtmp://example.com/stream" \
+  -e STREAMS_0_DST="srt://example.com/live" \
+  overlayer-dev
 ```
 
 Example of ffmpeg cli:
 
 ```bash
-ffmpeg -i "INPUT" -i logo.svg -filter_complex "[1:v]scale=128:128,format=rgba,colorchannelmixer=aa=0.75[logo];[0:v][logo]overlay=24:(main_h-overlay_h)/2" -c:v libx264 -preset ultrafast -c:a copy -f mpegts "OUTPUT"
+ffmpeg -i "INPUT" -i logo.svg -filter_complex "[1:v]scale=128:128,format=rgba,colorchannelmixer=aa=0.75[logo];[0:v][logo]overlay=24:(main_h-overlay_h)/2" -c:v libx264 -preset ultrafast -c:a aac -f flv "OUTPUT"
 ```
 
 Example of ffmpeg Dockerfile:
@@ -25,7 +33,7 @@ podman run --rm -it \
   -c:v "libx264" \
   -preset "ultrafast" \
   -tune "zerolatency" \
-  -c:a "copy" \
+  -c:a "aac" \
   -flush_packets 0 \
   -max_muxing_queue_size 2048 \
   -rtbufsize 1500k \
@@ -37,5 +45,5 @@ podman run --rm -it \
   -probesize 100000000 \
   -err_detect "ignore_err" \
   -loglevel "warning" \
-  -f "mpegts" "OUTPUT"
+  -f "flv" "OUTPUT"
 ```
