@@ -53,6 +53,10 @@ func LoadConfig() (Config, error) {
 		streams = append(streams, StreamConfig{Src: src, Dst: dst})
 	}
 
+	if len(streams) == 0 {
+		return Config{}, fmt.Errorf("Streams must be defined with STREAMS_[num]_SRC and STREAMS_[num]_DST (starting from STREAMS_0_SRC/DST)")
+	}
+
 	return Config{
 		Overlay: overlayConfig,
 		Streams: streams,
