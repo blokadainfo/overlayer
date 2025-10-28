@@ -1,1 +1,9 @@
-run*.sh
+# Ignore all files
+**
+
+# Allow only .go files
+!*.go
+
+# Allow go.mod and go.sum
+!go.mod
+!go.sum
