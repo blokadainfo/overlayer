@@ -4,8 +4,8 @@ import (
 	"log"
 	"time"
 
-	"github.com/blokadainfo/overlayer/config"
-	"github.com/blokadainfo/overlayer/ffmpeg"
+	"github.com/blokadainfo/overlayer/src/config"
+	"github.com/blokadainfo/overlayer/src/ffmpeg"
 )
 
 func StartStream(oc config.OverlayConfig, sc config.StreamConfig) {

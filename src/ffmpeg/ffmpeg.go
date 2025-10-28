@@ -6,7 +6,7 @@ import (
 	"os/exec"
 	"strings"
 
-	"github.com/blokadainfo/overlayer/config"
+	"github.com/blokadainfo/overlayer/src/config"
 )
 
 func CreateFFmpegCommand(oc config.OverlayConfig, sc config.StreamConfig) *exec.Cmd {

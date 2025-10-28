@@ -3,8 +3,8 @@ package main
 import (
 	"log"
 
-	"github.com/blokadainfo/overlayer/config"
-	"github.com/blokadainfo/overlayer/stream"
+	"github.com/blokadainfo/overlayer/src/config"
+	"github.com/blokadainfo/overlayer/src/stream"
 )
 
 func main() {
