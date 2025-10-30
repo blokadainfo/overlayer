@@ -15,6 +15,7 @@ type OverlayConfig struct {
 	LogoPath   string
 	LogoHeight int
 	LogoWidth  int
+	LogoAlpha  float64
 }
 
 type StreamConfig struct {
@@ -42,6 +43,12 @@ func LoadConfig() (Config, error) {
 		return Config{}, fmt.Errorf("invalid OVERLAY_LOGO_WIDTH value: %v", err)
 	}
 	overlayConfig.LogoWidth = logoWidth
+
+	logoAlpha, err := strconv.ParseFloat(os.Getenv("OVERLAY_LOGO_ALPHA"), 64)
+	if err != nil {
+		return Config{}, fmt.Errorf("invalid OVERLAY_LOGO_ALPHA value: %v", err)
+	}
+	overlayConfig.LogoAlpha = logoAlpha
 
 	var streams []StreamConfig
 	for i := 0; ; i++ {

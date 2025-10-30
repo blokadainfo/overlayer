@@ -9,6 +9,7 @@ podman run \
   -e OVERLAY_LOGO_PATH="logo.svg" \
   -e OVERLAY_LOGO_HEIGHT="128" \
   -e OVERLAY_LOGO_WIDTH="128" \
+  -e OVERLAY_LOGO_ALPHA="1" \
   -e STREAMS_0_SRC="rtmp://example.com/stream" \
   -e STREAMS_0_DST="srt://example.com/live" \
   overlayer-dev
