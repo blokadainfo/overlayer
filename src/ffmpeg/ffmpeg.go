@@ -18,6 +18,7 @@ func CreateFFmpegCommand(oc config.OverlayConfig, sc config.StreamConfig) *exec.
 		"-filter_complex", fmt.Sprintf("[1:v]format=rgba,colorchannelmixer=aa=%f[logo];[logo][0:v]scale=w=%d*(rh/%d):h=%d*(rh/%d)[logo_scaled];[0:v][logo_scaled]overlay=24*(main_h/%d):(main_h-overlay_h)/2", oc.LogoAlpha, oc.LogoWidth, referenceHeight, oc.LogoHeight, referenceHeight, referenceHeight),
 		"-c:v", "libx264",
 		"-preset", "ultrafast",
+		"-tune", "zerolatency",
 		"-c:a", "aac",
 	}
 
