@@ -19,6 +19,8 @@ func CreateFFmpegCommand(oc config.OverlayConfig, sc config.StreamConfig) *exec.
 		"-c:v", "libx264",
 		"-preset", "ultrafast",
 		"-tune", "zerolatency",
+		"-bf", "0",
+		"-maxrate", "20M",
 		"-c:a", "aac",
 	}
 
