@@ -20,6 +20,7 @@ func CreateFFmpegCommand(oc config.OverlayConfig, sc config.StreamConfig) *exec.
 		"-preset", "ultrafast",
 		"-tune", "zerolatency",
 		"-bf", "0",
+		"-g", "250",
 		"-maxrate", "20M",
 		"-c:a", "aac",
 	}
