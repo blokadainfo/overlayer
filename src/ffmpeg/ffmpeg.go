@@ -10,7 +10,7 @@ import (
 )
 
 func CreateFFmpegCommand(oc config.OverlayConfig, sc config.StreamConfig) *exec.Cmd {
-	referenceHeight := 1080 // Video height at which the logo will remain unscaled (exactly width x height pixels as defined in the config)
+	const referenceHeight = 1080 // Video height at which the logo will remain unscaled (exactly width x height pixels as defined in the config)
 
 	cmdArgs := []string{
 		"-i", sc.Src,
